@@ -1,5 +1,6 @@
 package com.gul.java8;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -130,6 +131,11 @@ public class FindArrayDup {
 
 		Optional<Integer> min = numbers5.stream().min(Integer::compareTo);
 		System.out.println(min.get());
+		
+//		 Find the Maximum Element in a List
+
+		Optional<Integer> max1 = numbers5.stream().max(Integer::compareTo);
+		System.out.println(max1.get());
 
 //		Partition a List into Odd and Even Numbers
 		Map<Boolean, List<Integer>> numbers7 = numbers5.stream()
@@ -271,6 +277,97 @@ public class FindArrayDup {
 		List<String> sds = map.entrySet().stream().map(entry -> entry.getKey() + "=" + entry.getValue())
 				.toList();
 		System.out.println(sds);
+
+//		Prime Number Program in Java
+
+		String name = "gulfarooqui1@gmail.com";
+		Map<Character, Long> coun = name.chars().mapToObj(c -> (char) c)
+				.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+		System.out.println(coun);
+//		Convert a List of Integers to an Array
+		List<Integer> numbers789 = Arrays.asList(1, 2, 3, 4, 5);
+		Integer[] arrnum = numbers789.stream().toArray(Integer[]::new);
+		System.out.println(Arrays.toString(arrnum));
+
+//		Convert a List of String to an Array
+		List<String> str789 = Arrays.asList("abc", "fsd", "dsef", "opt");
+		String[] arrnuma = str789.stream().toArray(String[]::new);
+		System.out.println(Arrays.toString(arrnuma));
+
+//		Create a Map from List of Strings (First Letter as Key)
+		List<String> words123 = Arrays.asList("apple", "banana", "avocado", "cherry", "blueberry");
+
+		Map<Character, List<String>> groupedByFirstLetter = words123.stream()
+				.collect(Collectors.groupingBy(word -> word.charAt(0)));
+
+		System.out.println(groupedByFirstLetter);
+
+//		Convert a List of Strings to a List of Integer Hash Codes
+		List<String> words12 = Arrays.asList("apple", "banana", "cherry", "apple");
+		List<Integer> intword = words12.stream().map(String::hashCode).collect(Collectors.toList());
+		System.out.println(intword);
+
+//		Find Distinct Elements in a List of Custom Objects
+		List<Person> people = Arrays.asList(new Person("John", 25), new Person("Jane", 22),
+				new Person("John", 30), new Person("Lucy", 30));
+
+		List<Person> distinctPeopleByName = people.stream().distinct().collect(Collectors.toList());
+
+		System.out.println(distinctPeopleByName);
+
+//		 Partition Prime and Non-Prime Numbers in a List
+		List<Integer> numbers123 = Arrays.asList(2, 3, 4, 5, 6, 7, 8, 9, 10);
+		Map<Boolean, List<Integer>> partitioned = numbers123.stream()
+				.collect(Collectors.partitioningBy(FindArrayDup::isPrime));
+
+		System.out.println("Prime numbers: " + partitioned.get(true));
+		System.out.println("Non-prime numbers: " + partitioned.get(false));
+
+	}
+
+	public static boolean isPrime(int number) {
+		if (number <= 1)
+			return false;
+		for (int i = 2; i <= Math.sqrt(number); i++) {
+			if (number % i == 0)
+				return false;
+		}
+		return true;
+	}
+
+	static class Person {
+		String name;
+		int age;
+
+		Person(String name, int age) {
+			this.name = name;
+			this.age = age;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		@Override
+		public boolean equals(Object o) {
+			if (this == o)
+				return true;
+			if (o == null || getClass() != o.getClass())
+				return false;
+			Person person = (Person) o;
+			return name.equals(person.name);
+		}
+
+		@Override
+		public int hashCode() {
+			return name.hashCode();
+		}
+
+		@Override
+		public String toString() {
+			return name + "(" + age + ")";
+		}
 	}
 
 }

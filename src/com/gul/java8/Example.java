@@ -1,0 +1,10 @@
+package com.gul.java8;
+
+public class Example {
+
+	public static void main(String[] args) {
+ 
+		
+	}
+
+}
